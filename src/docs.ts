@@ -221,7 +221,11 @@ export function setupApiDocumentation(app: INestApplication): void {
     customSwaggerUiPath: join(process.cwd(), 'public'),
     customCss: swaggerThemeCss,
     customfavIcon: '/assets/brand-logo.svg',
-    customSiteTitle: 'Burma Project Ideas API Docs | မြန်မာ API စာရွက်စာတမ်း',
+    customSiteTitle: 'Burma Project Ideas API Docs | မြန်မာ API များ',
+    swaggerOptions: {
+      tagsSorter: 'alpha',
+      operationsSorter: 'alpha',
+    },
   });
 
   app.use('/scalar', (_req: Request, res: Response) => {

@@ -939,14 +939,16 @@
     }
 
     .nav {
-      min-height: 82px;
-      padding-inline: 32px;
+      min-height: 76px;
+      padding-inline: 28px;
+      gap: 16px;
     }
 
     .brand {
       color: var(--ink);
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      flex-shrink: 0;
     }
 
     .brand-mark {
@@ -962,46 +964,93 @@
     }
 
     .nav-links {
-      min-width: min(410px, 34vw);
-      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
       border: 1px solid var(--line);
       border-radius: 10px;
       background: var(--surface);
     }
 
     .nav-links ul {
-      justify-content: center;
-      gap: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
     .nav-links li {
-      flex: 1;
+      display: inline-flex;
     }
 
-    .nav-links [data-copy][lang="en"] {
+    .nav-links a {
+      min-height: 38px;
+      padding: 7px 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
       white-space: nowrap;
+      text-decoration: none;
+      transition: color 160ms ease, background 160ms ease;
     }
 
-    .nav-links a,
+    .nav-links a:hover {
+      background: var(--surface-muted);
+      color: var(--ink);
+    }
+
+    .nav-links a:lang(my),
+    .language-switcher button:lang(my),
+    .nav-cta:lang(my) {
+      line-height: 1.4;
+    }
+
     .footer-links a {
       justify-content: center;
       color: var(--muted);
       font-size: 14px;
     }
 
-    .nav-links a:hover,
     .footer-links a:hover {
       background: var(--surface-muted);
       color: var(--ink);
     }
 
+    .nav-tools {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
     .language-switcher {
-      border-color: var(--line-strong);
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
       background: var(--surface);
     }
 
     .language-switcher button {
+      min-width: 58px;
+      min-height: 36px;
+      padding: 4px 12px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
       color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: color 160ms ease, background 160ms ease;
     }
 
     .language-switcher button[aria-pressed="true"] {
@@ -1015,9 +1064,12 @@
     }
 
     .nav-cta {
+      min-height: 38px;
+      padding: 8px 16px;
       border-color: var(--line-strong);
       background: var(--surface-muted);
       color: var(--ink);
+      white-space: nowrap;
     }
 
     .nav-cta:hover,
@@ -1321,7 +1373,7 @@
       }
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .nav {
         padding: 14px 18px;
       }
@@ -1329,7 +1381,9 @@
       .nav-links {
         display: none;
       }
+    }
 
+    @media (max-width: 800px) {
       .hero,
       .section {
         padding-left: 20px;
@@ -1407,7 +1461,7 @@
 
       <div class="nav-links">
         <ul>
-          <li><a href="#docs"><span data-copy lang="en">API Docs</span><span data-copy lang="my">API စာရွက်စာတမ်း</span></a></li>
+          <li><a href="#docs"><span data-copy lang="en">API Docs</span><span data-copy lang="my">API Docs</span></a></li>
           <li><a href="#catalog"><span data-copy lang="en">API Catalog</span><span data-copy lang="my">API စာရင်း</span></a></li>
           <li><a href="#capabilities"><span data-copy lang="en">Capabilities</span><span data-copy lang="my">စွမ်းဆောင်ရည်များ</span></a></li>
         </ul>
@@ -1426,7 +1480,7 @@
         <a class="nav-cta" href="/swagger">
           <svg aria-hidden="true"><use href="/assets/landing-icons.svg#icon-docs"></use></svg>
           <span data-copy lang="en">Open API docs</span>
-          <span data-copy lang="my">API စာရွက်စာတမ်း ဖွင့်ရန်</span>
+          <span data-copy lang="my">API docs ဖွင့်ရန်</span>
         </a>
       </div>
     </nav>
@@ -1455,7 +1509,7 @@
           <nav class="hero-actions" aria-labelledby="docs-actions-title">
             <span class="sr-only" id="docs-actions-title">
               <span data-copy lang="en">API documentation options</span>
-              <span data-copy lang="my">API စာရွက်စာတမ်းရွေးချယ်မှုများ</span>
+              <span data-copy lang="my">API documentation ရွေးချယ်မှုများ</span>
             </span>
             <ul>
               <li>
@@ -1480,7 +1534,7 @@
             </div>
             <div class="fact">
               <dd lang="en">2</dd>
-              <dt><span data-copy lang="en">Documentation views</span><span data-copy lang="my">စာရွက်စာတမ်းကြည့်ရှုရန် နည်းလမ်းများ</span></dt>
+              <dt><span data-copy lang="en">Documentation views</span><span data-copy lang="my">API Docs ကြည့်ရှုရန် နည်းလမ်းများ</span></dt>
             </div>
             <div class="fact">
               <dd lang="en">REST</dd>
@@ -1560,7 +1614,7 @@
     <section class="docs-band" id="docs" aria-labelledby="docs-title">
       <div class="section">
         <div class="section-head">
-          <p class="section-kicker"><span data-copy lang="en">API Documentation</span><span data-copy lang="my">API စာရွက်စာတမ်း</span></p>
+          <p class="section-kicker"><span data-copy lang="en">API Documentation</span><span data-copy lang="my">API Documentation</span></p>
           <h2 id="docs-title">
             <span data-copy lang="en">Choose how to browse the API.</span>
             <span data-copy lang="my">API ကိုကြည့်ရှုရန် နည်းလမ်းရွေးပါ။</span>
@@ -1611,39 +1665,9 @@
 
       <ul class="catalog-grid">
         <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-calendar"></use></svg></span><h3><span data-copy lang="en">Burma Calendar</span><span data-copy lang="my">မြန်မာပြက္ခဒိန်</span></h3></div>
-          <p><span data-copy lang="en">42-day monthly calendar grids, Myanmar Era calculation, and public holidays across 2024–2027.</span><span data-copy lang="my">၄၂ ကွက် လစဉ်ပြက္ခဒိန် grid၊ မြန်မာသက္ကရာဇ်တွက်ချက်မှုနှင့် ၂၀၂၄-၂၀၂၇ ရုံးပိတ်ရက်များ။</span></p>
-          <code class="route" lang="en">/burma-calendar/month</code>
-        </li>
-        <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-book"></use></svg></span><h3><span data-copy lang="en">adhihtan</span><span data-copy lang="my">အဓိဋ္ဌာန်</span></h3></div>
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-book"></use></svg></span><h3><span data-copy lang="en">Adhihtan</span><span data-copy lang="my">အဓိဋ္ဌာန်</span></h3></div>
           <p><span data-copy lang="en">Prayer categories, schedules, instructions, and localized chant names.</span><span data-copy lang="my">အဓိဋ္ဌာန်အမျိုးအစားများ၊ အချိန်ဇယားများ၊ လုပ်ဆောင်နည်းများနှင့် ဂုဏ်တော်အမည်များ။</span></p>
           <code class="route" lang="en">/adhihtan/categories</code>
-        </li>
-        <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-zodiac"></use></svg></span><h3><span data-copy lang="en">Myanmar Nameology</span><span data-copy lang="my">မြန်မာနာမည်ကိန်း</span></h3></div>
-          <p><span data-copy lang="en">Traditional name-number calculation, letter values, and meanings.</span><span data-copy lang="my">ရိုးရာနာမည်ကိန်းတွက်ချက်မှု၊ အက္ခရာတန်ဖိုးများနှင့် အဓိပ္ပာယ်များ။</span></p>
-          <code class="route" lang="en">/myanmar-nameology/calculate</code>
-        </li>
-        <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-book"></use></svg></span><h3><span data-copy lang="en">Myanmar Word List</span><span data-copy lang="my">မြန်မာစာလုံးစာရင်း</span></h3></div>
-          <p><span data-copy lang="en">Prefix search, batch spelling checks, suggestions, and an offline word list.</span><span data-copy lang="my">Prefix ရှာဖွေမှု၊ အစုလိုက်စာလုံးပေါင်းစစ်ဆေးမှု၊ အကြံပြုစာလုံးများနှင့် offline စာလုံးစာရင်း။</span></p>
-          <code class="route" lang="en">/myanmar-word-list/words</code>
-        </li>
-        <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-bird"></use></svg></span><h3><span data-copy lang="en">Birds</span><span data-copy lang="my">ငှက်များ</span></h3></div>
-          <p><span data-copy lang="en">Myanmar bird species and reference information.</span><span data-copy lang="my">မြန်မာနိုင်ငံရှိ ငှက်မျိုးစိတ်များနှင့် ကိုးကားအချက်အလက်များ။</span></p>
-          <code class="route" lang="en">/birds</code>
-        </li>
-        <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-snake"></use></svg></span><h3><span data-copy lang="en">Snakes</span><span data-copy lang="my">မြွေများ</span></h3></div>
-          <p><span data-copy lang="en">Myanmar snake species and related details.</span><span data-copy lang="my">မြန်မာနိုင်ငံရှိ မြွေမျိုးစိတ်များနှင့် ဆက်စပ်အချက်အလက်များ။</span></p>
-          <code class="route" lang="en">/snakes</code>
-        </li>
-        <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-map"></use></svg></span><h3><span data-copy lang="en">Bagan Map</span><span data-copy lang="my">ပုဂံမြေပုံ</span></h3></div>
-          <p><span data-copy lang="en">Bagan pagodas, locations, and travel route data.</span><span data-copy lang="my">ပုဂံဘုရားများ၊ တည်နေရာများနှင့် ခရီးစဉ်ဒေတာ။</span></p>
-          <code class="route" lang="en">/bagan-map</code>
         </li>
         <li class="catalog-card">
           <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-art"></use></svg></span><h3><span data-copy lang="en">Art Gallery</span><span data-copy lang="my">အနုပညာပြခန်း</span></h3></div>
@@ -1651,29 +1675,19 @@
           <code class="route" lang="en">/art-gallery</code>
         </li>
         <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-cards"></use></svg></span><h3><span data-copy lang="en">Pick a Pile</span><span data-copy lang="my">ကတ်တစ်ပုံရွေး</span></h3></div>
-          <p><span data-copy lang="en">Question and answer sets for fortune-telling cards.</span><span data-copy lang="my">ဗေဒင်ကတ်များအတွက် မေးခွန်းနှင့် အဖြေစုများ။</span></p>
-          <code class="route" lang="en">/pick-a-pile</code>
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-map"></use></svg></span><h3><span data-copy lang="en">Bagan Map</span><span data-copy lang="my">ပုဂံမြေပုံ</span></h3></div>
+          <p><span data-copy lang="en">Bagan pagodas, locations, and travel route data.</span><span data-copy lang="my">ပုဂံဘုရားများ၊ တည်နေရာများနှင့် ခရီးစဉ်ဒေတာ။</span></p>
+          <code class="route" lang="en">/bagan-map</code>
         </li>
         <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-thread"></use></svg></span><h3><span data-copy lang="en">Lat Htauk Bay Din</span><span data-copy lang="my">လက်ထောက်ဗေဒင်</span></h3></div>
-          <p><span data-copy lang="en">Traditional divination questions, numbers, and answers.</span><span data-copy lang="my">ရိုးရာဗေဒင် မေးခွန်း၊ နံပါတ်နှင့် အဖြေများ။</span></p>
-          <code class="route" lang="en">/lat-htauk-bay-din</code>
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-bird"></use></svg></span><h3><span data-copy lang="en">Birds</span><span data-copy lang="my">ငှက်များ</span></h3></div>
+          <p><span data-copy lang="en">Myanmar bird species and reference information.</span><span data-copy lang="my">မြန်မာနိုင်ငံရှိ ငှက်မျိုးစိတ်များနှင့် ကိုးကားအချက်အလက်များ။</span></p>
+          <code class="route" lang="en">/birds</code>
         </li>
         <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-moon"></use></svg></span><h3><span data-copy lang="en">Dream Dictionary</span><span data-copy lang="my">အိပ်မက်အဘိဓာန်</span></h3></div>
-          <p><span data-copy lang="en">Grouped dream interpretations and lookup details.</span><span data-copy lang="my">အုပ်စုခွဲထားသော အိပ်မက်အနက်ဖွင့်ဆိုချက်နှင့် ရှာဖွေမှုအသေးစိတ်များ။</span></p>
-          <code class="route" lang="en">/dream-dictionary</code>
-        </li>
-        <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-book"></use></svg></span><h3><span data-copy lang="en">Phayar Sar</span><span data-copy lang="my">ဘုရားစာ</span></h3></div>
-          <p><span data-copy lang="en">Religious text groups and detail entries.</span><span data-copy lang="my">ဘာသာရေးစာစုများနှင့် အသေးစိတ်အကြောင်းအရာများ။</span></p>
-          <code class="route" lang="en">/phayar-sar</code>
-        </li>
-        <li class="catalog-card">
-          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-book"></use></svg></span><h3><span data-copy lang="en">Missing Historical Records</span><span data-copy lang="my">ပျောက်ဆုံးသမိုင်းမှတ်တမ်းများ</span></h3></div>
-          <p><span data-copy lang="en">Historical books, metadata, and page-level record content.</span><span data-copy lang="my">သမိုင်းစာအုပ်များ၊ metadata နှင့် စာမျက်နှာအလိုက် မှတ်တမ်းအကြောင်းအရာများ။</span></p>
-          <code class="route" lang="en">/missing-historical-records</code>
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-calendar"></use></svg></span><h3><span data-copy lang="en">Burma Calendar</span><span data-copy lang="my">မြန်မာပြက္ခဒိန်</span></h3></div>
+          <p><span data-copy lang="en">42-day monthly calendar grids, Myanmar Era calculation, and public holidays across 2024–2027.</span><span data-copy lang="my">၄၂ ကွက် လစဉ်ပြက္ခဒိန် grid၊ မြန်မာသက္ကရာဇ်တွက်ချက်မှုနှင့် ၂၀၂၄-၂၀၂၇ ရုံးပိတ်ရက်များ။</span></p>
+          <code class="route" lang="en">/burma-calendar/month</code>
         </li>
         <li class="catalog-card">
           <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-leaf"></use></svg></span><h3><span data-copy lang="en">Burmese Agriculture</span><span data-copy lang="my">မြန်မာ့စိုက်ပျိုးရေး</span></h3></div>
@@ -1686,9 +1700,24 @@
           <code class="route" lang="en">/burmese-recipes</code>
         </li>
         <li class="catalog-card">
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-moon"></use></svg></span><h3><span data-copy lang="en">Dream Dictionary</span><span data-copy lang="my">အိပ်မက်အဘိဓာန်</span></h3></div>
+          <p><span data-copy lang="en">Grouped dream interpretations and lookup details.</span><span data-copy lang="my">အုပ်စုခွဲထားသော အိပ်မက်အနက်ဖွင့်ဆိုချက်နှင့် ရှာဖွေမှုအသေးစိတ်များ။</span></p>
+          <code class="route" lang="en">/dream-dictionary</code>
+        </li>
+        <li class="catalog-card">
           <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-alert"></use></svg></span><h3><span data-copy lang="en">Incompatible Food</span><span data-copy lang="my">အတည့်မဖြစ်သော အစားအစာများ</span></h3></div>
           <p><span data-copy lang="en">Food compatibility notes and traditional guidance.</span><span data-copy lang="my">အစားအစာအတည့်အကျပ် မှတ်စုများနှင့် ရိုးရာလမ်းညွှန်ချက်များ။</span></p>
           <code class="route" lang="en">/incompatible-food</code>
+        </li>
+        <li class="catalog-card">
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-thread"></use></svg></span><h3><span data-copy lang="en">Lat Htauk Bay Din</span><span data-copy lang="my">လက်ထောက်ဗေဒင်</span></h3></div>
+          <p><span data-copy lang="en">Traditional divination questions, numbers, and answers.</span><span data-copy lang="my">ရိုးရာဗေဒင် မေးခွန်း၊ နံပါတ်နှင့် အဖြေများ။</span></p>
+          <code class="route" lang="en">/lat-htauk-bay-din</code>
+        </li>
+        <li class="catalog-card">
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-book"></use></svg></span><h3><span data-copy lang="en">Missing Historical Records</span><span data-copy lang="my">ပျောက်ဆုံးသမိုင်းမှတ်တမ်းများ</span></h3></div>
+          <p><span data-copy lang="en">Historical books, metadata, and page-level record content.</span><span data-copy lang="my">သမိုင်းစာအုပ်များ၊ metadata နှင့် စာမျက်နှာအလိုက် မှတ်တမ်းအကြောင်းအရာများ။</span></p>
+          <code class="route" lang="en">/missing-historical-records</code>
         </li>
         <li class="catalog-card">
           <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-calendar"></use></svg></span><h3><span data-copy lang="en">Myanmar Months</span><span data-copy lang="my">မြန်မာလများ</span></h3></div>
@@ -1696,14 +1725,39 @@
           <code class="route" lang="en">/myanmar-months</code>
         </li>
         <li class="catalog-card">
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-zodiac"></use></svg></span><h3><span data-copy lang="en">Myanmar Nameology</span><span data-copy lang="my">မြန်မာနာမည်ကိန်း</span></h3></div>
+          <p><span data-copy lang="en">Traditional name-number calculation, letter values, and meanings.</span><span data-copy lang="my">ရိုးရာနာမည်ကိန်းတွက်ချက်မှု၊ အက္ခရာတန်ဖိုးများနှင့် အဓိပ္ပာယ်များ။</span></p>
+          <code class="route" lang="en">/myanmar-nameology/calculate</code>
+        </li>
+        <li class="catalog-card">
           <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-quote"></use></svg></span><h3><span data-copy lang="en">Myanmar Proverbs</span><span data-copy lang="my">မြန်မာစကားပုံများ</span></h3></div>
           <p><span data-copy lang="en">Traditional proverbs for learning and reference products.</span><span data-copy lang="my">သင်ယူရေးနှင့် ကိုးကားထုတ်ကုန်များအတွက် ရိုးရာစကားပုံများ။</span></p>
           <code class="route" lang="en">/myanmar-proverbs</code>
         </li>
         <li class="catalog-card">
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-book"></use></svg></span><h3><span data-copy lang="en">Myanmar Word List</span><span data-copy lang="my">မြန်မာစာလုံးစာရင်း</span></h3></div>
+          <p><span data-copy lang="en">Prefix search, batch spelling checks, suggestions, and an offline word list.</span><span data-copy lang="my">Prefix ရှာဖွေမှု၊ အစုလိုက်စာလုံးပေါင်းစစ်ဆေးမှု၊ အကြံပြုစာလုံးများနှင့် offline စာလုံးစာရင်း။</span></p>
+          <code class="route" lang="en">/myanmar-word-list/words</code>
+        </li>
+        <li class="catalog-card">
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-book"></use></svg></span><h3><span data-copy lang="en">Phayar Sar</span><span data-copy lang="my">ဘုရားစာ</span></h3></div>
+          <p><span data-copy lang="en">Religious text groups and detail entries.</span><span data-copy lang="my">ဘာသာရေးစာစုများနှင့် အသေးစိတ်အကြောင်းအရာများ။</span></p>
+          <code class="route" lang="en">/phayar-sar</code>
+        </li>
+        <li class="catalog-card">
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-cards"></use></svg></span><h3><span data-copy lang="en">Pick a Pile</span><span data-copy lang="my">ကတ်တစ်ပုံရွေး</span></h3></div>
+          <p><span data-copy lang="en">Question and answer sets for fortune-telling cards.</span><span data-copy lang="my">ဗေဒင်ကတ်များအတွက် မေးခွန်းနှင့် အဖြေစုများ။</span></p>
+          <code class="route" lang="en">/pick-a-pile</code>
+        </li>
+        <li class="catalog-card">
           <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-spark"></use></svg></span><h3><span data-copy lang="en">Quotlets</span><span data-copy lang="my">အဆိုအမိန့်များ</span></h3></div>
           <p><span data-copy lang="en">Inspirational quotes and short shareable text entries.</span><span data-copy lang="my">အားပေးစကားများနှင့် မျှဝေရလွယ်သော စာသားတိုများ။</span></p>
           <code class="route" lang="en">/quotlets</code>
+        </li>
+        <li class="catalog-card">
+          <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-snake"></use></svg></span><h3><span data-copy lang="en">Snakes</span><span data-copy lang="my">မြွေများ</span></h3></div>
+          <p><span data-copy lang="en">Myanmar snake species and related details.</span><span data-copy lang="my">မြန်မာနိုင်ငံရှိ မြွေမျိုးစိတ်များနှင့် ဆက်စပ်အချက်အလက်များ။</span></p>
+          <code class="route" lang="en">/snakes</code>
         </li>
         <li class="catalog-card">
           <div class="catalog-card-heading"><span class="catalog-icon" aria-hidden="true"><svg><use href="/assets/landing-icons.svg#icon-zodiac"></use></svg></span><h3><span data-copy lang="en">Zodiac</span><span data-copy lang="my">ရာသီခွင်</span></h3></div>
