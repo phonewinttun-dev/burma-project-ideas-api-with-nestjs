@@ -12,6 +12,14 @@ interface ApiTagDefinition {
 
 const apiTagDefinitions: ApiTagDefinition[] = [
   {
+    name: 'burma-calendar | မြန်မာပြက္ခဒိန်',
+    english:
+      'Generate 42-cell monthly calendar grids with Myanmar Era years, traditional month pairs, and numerals, filter official Myanmar public holidays across 2024–2027, or check holiday status for any specific date with `GET /burma-calendar/*`.',
+    myanmar:
+      'မြန်မာသက္ကရာဇ်၊ လတွဲများနှင့် မြန်မာဂဏန်းများပါဝင်သော ၄၂ ကွက် လစဉ်ပြက္ခဒိန် grid များကို တွက်ချက်ပါ၊ ၂၀၂၄ မှ ၂၀၂၇ အထိ တရားဝင် မြန်မာ့ရုံးပိတ်ရက်များကို စစ်ဆေးရယူပါ သို့မဟုတ် ရက်စွဲတစ်ခုချင်းစီ၏ ရုံးပိတ်ရက်အခြေအနေကို `GET /burma-calendar/*` ဖြင့် စစ်ဆေးပါ။',
+    sourceUrl: 'https://github.com/sannlynnhtun-coding/burma-calendar',
+  },
+  {
     name: 'adhihtan | အဓိဋ္ဌာန်',
     english:
       'Build a read-only adhihtan counting flow: get the categories, show the selected category’s guidance, load every schedule level or one level, then track dates, counts, and completion in the client. Category 5 is custom and has no server schedule. Use `GET /adhihtan/data.json` to cache all static content in one request.',
@@ -213,7 +221,11 @@ export function setupApiDocumentation(app: INestApplication): void {
     customSwaggerUiPath: join(process.cwd(), 'public'),
     customCss: swaggerThemeCss,
     customfavIcon: '/assets/brand-logo.svg',
-    customSiteTitle: 'Burma Project Ideas API Docs | မြန်မာ API စာရွက်စာတမ်း',
+    customSiteTitle: 'Burma Project Ideas API Docs | မြန်မာ API များ',
+    swaggerOptions: {
+      tagsSorter: 'alpha',
+      operationsSorter: 'alpha',
+    },
   });
 
   app.use('/scalar', (_req: Request, res: Response) => {
