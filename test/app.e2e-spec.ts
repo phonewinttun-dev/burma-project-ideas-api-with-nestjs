@@ -63,7 +63,8 @@ describe('AppController (e2e)', () => {
             },
           },
         });
-        expect(res.text).toContain('<dd lang="en">20</dd>');
+        expect(res.text).toContain('<dd lang="en">21</dd>');
+        expect(res.text).toContain('/burma-calendar/month');
         expect(res.text).toContain('/adhihtan/categories');
         expect(res.text).toContain('/myanmar-nameology/calculate');
         expect(res.text).toContain('/myanmar-word-list/words');
@@ -407,6 +408,7 @@ describe('AppController (e2e)', () => {
         expect(res.body.info.title).toContain('မြန်မာ');
         expect(res.body.info.description).toContain('မြန်မာ့ယဉ်ကျေးမှု');
         const expectedProjectTags = [
+          'burma-calendar | မြန်မာပြက္ခဒိန်',
           'adhihtan | အဓိဋ္ဌာန်',
           'myanmar-nameology | မြန်မာနာမည်ကိန်း',
           'myanmar-word-list | မြန်မာစာလုံးစာရင်း',
@@ -604,6 +606,86 @@ describe('AppController (e2e)', () => {
           `${expectedOrigin}/zodiac/images/zodiac-signs-2/sagittarius.jpg`,
         );
       });
+  });
+
+  describe('/burma-calendar', () => {
+    it('GET /burma-calendar/holidays should return filtered holidays', async () => {
+      await request(app.getHttpServer())
+        .get('/burma-calendar/holidays?year=2026&month=April')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .expect((res) => {
+          expect(res.body.length).toBeGreaterThan(0);
+          expect(res.body.every((h) => h.month === 'April')).toBe(true);
+        });
+    });
+
+    it('GET /burma-calendar/holidays/:year should return 404 for unknown year', async () => {
+      await request(app.getHttpServer())
+        .get('/burma-calendar/holidays/2099')
+        .expect(404);
+    });
+
+    it('GET /burma-calendar/holidays/:year should return annual holidays', async () => {
+      await request(app.getHttpServer())
+        .get('/burma-calendar/holidays/2026')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .expect((res) => {
+          expect(res.body.year).toBe(2026);
+          expect(res.body.totalHolidays).toBeGreaterThan(0);
+          expect(res.body.holidays.length).toBeGreaterThan(0);
+        });
+    });
+
+    it('GET /burma-calendar/month should compute 42-day month grid', async () => {
+      await request(app.getHttpServer())
+        .get('/burma-calendar/month?year=2026&month=4')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .expect((res) => {
+          expect(res.body.year).toBe(2026);
+          expect(res.body.month).toBe(4);
+          expect(res.body.monthName).toBe('April');
+          expect(res.body.myanmarMonthPair).toBe('တပေါင်း / တန်ခူး');
+          expect(res.body.myanmarEra).toBe('၁၃၈၇ / ၁၃၈၈');
+          expect(res.body.totalDaysInMonth).toBe(30);
+          expect(res.body.days).toHaveLength(42);
+        });
+    });
+
+    it('GET /burma-calendar/reference should return calendar constants', async () => {
+      await request(app.getHttpServer())
+        .get('/burma-calendar/reference')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .expect((res) => {
+          expect(res.body.englishMonths).toHaveLength(12);
+          expect(res.body.myanmarMonthPairs).toHaveLength(12);
+          expect(res.body.weekdays).toHaveLength(7);
+          expect(res.body.myanmarDigits).toHaveProperty('1', '၁');
+        });
+    });
+
+    it('GET /burma-calendar/check-date should identify public holidays', async () => {
+      await request(app.getHttpServer())
+        .get('/burma-calendar/check-date?date=2027-01-04')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .expect((res) => {
+          expect(res.body.date).toBe('2027-01-04');
+          expect(res.body.isHoliday).toBe(true);
+          expect(res.body.holiday.name).toBe('လွတ်လပ်ရေးနေ့');
+          expect(res.body.holiday.nameEn).toBe('Independence Day');
+          expect(res.body.dayMyanmar).toBe('၄');
+        });
+    });
+
+    it('GET /burma-calendar/check-date should return 400 for invalid date format', async () => {
+      await request(app.getHttpServer())
+        .get('/burma-calendar/check-date?date=invalid-date')
+        .expect(400);
+    });
   });
 
   it('should serve static image assets from public', async () => {

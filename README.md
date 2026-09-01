@@ -5,11 +5,13 @@
 To deploy the project using Vercel, follow these simple steps:
 
 1. Install Vercel globally:
+
    ```bash
    npm i -g vercel
    ```
 
 2. Log in to your Vercel account:
+
    ```bash
    vercel login
    ```
@@ -63,7 +65,7 @@ npm run start:dev --watch
 
 This command ensures that your server restarts automatically whenever changes are detected.
 
-------
+---
 
 ## Acknowledgements
 
@@ -79,6 +81,7 @@ This document outlines the project status. Finished API features are checked aga
 - [x] Art Gallery
 - [x] Bagan Map
 - [x] Birds
+- [x] Burma Calendar
 - [x] Burmese Agriculture
 - [x] Burmese Recipes
 - [x] Dream Dictionary
@@ -100,6 +103,21 @@ This document outlines the project status. Finished API features are checked aga
 
 - [ ] Banking Management System
 - [ ] Movie Ticket Online Booking System
+
+## Burma Calendar API flow
+
+Burma Calendar provides 42-day monthly calendar matrices, Myanmar Era (မြန်မာသက္ကရာဇ်) calculations, Myanmar numerals conversion, lunar month pair mappings, and official public holiday schedules across 2024–2027. Clients can render full calendar views, look up annual holidays, or check whether a single date is a public holiday or weekend.
+
+<p lang="my">Burma Calendar တွင် ၄၂ ကွက် လစဉ်ပြက္ခဒိန် grid တွက်ချက်မှု၊ မြန်မာသက္ကရာဇ်တွက်ချက်မှု၊ မြန်မာဂဏန်းပြောင်းလဲမှု၊ လတွဲသတ်မှတ်ချက်များနှင့် ၂၀၂၄ မှ ၂၀၂၇ အထိ တရားဝင် မြန်မာ့ရုံးပိတ်ရက်မှတ်တမ်းများ ပါဝင်သည်။ Client များသည် ပြက္ခဒိန် UI အပြည့်အစုံကို ဖော်ပြနိုင်ခြင်း၊ နှစ်အလိုက် ရုံးပိတ်ရက်များ ရယူနိုင်ခြင်းနှင့် ရက်စွဲတစ်ခုချင်းစီ၏ ရုံးပိတ်ရက်အခြေအနေကို စစ်ဆေးနိုင်ခြင်းတို့ ဆောင်ရွက်နိုင်သည်။</p>
+
+```http
+GET /burma-calendar/month?year=2026&month=4
+GET /burma-calendar/holidays
+GET /burma-calendar/holidays?year=2026&month=April
+GET /burma-calendar/holidays/2026
+GET /burma-calendar/reference
+GET /burma-calendar/check-date?date=2027-01-04
+```
 
 ## NatMyatSi API flow
 
