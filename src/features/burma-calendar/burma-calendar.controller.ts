@@ -22,6 +22,22 @@ import { BurmaCalendarService } from './burma-calendar.service';
 export class BurmaCalendarController {
   constructor(private readonly calendarService: BurmaCalendarService) {}
 
+  @Get('years')
+  @ApiOperation({
+    summary: 'List available holiday years',
+    description:
+      'Retrieve the list of years for which official Myanmar public holiday schedules are available. ' +
+      '<span lang="my">တရားဝင် မြန်မာ့ရုံးပိတ်ရက်မှတ်တမ်းများ ရရှိနိုင်သော နှစ်များကို ရယူပါ။</span>',
+  })
+  @ApiOkResponse({
+    type: [Number],
+    description:
+      'Array of supported calendar years (e.g. [2024, 2025, 2026, 2027]).',
+  })
+  getYears(): number[] {
+    return this.calendarService.getAvailableYears();
+  }
+
   @Get('holidays')
   @ApiOperation({
     summary: 'Filter public holidays by year and/or month',
